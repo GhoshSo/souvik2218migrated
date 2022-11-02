@@ -278,3 +278,5 @@ explore: xss_test_7 {}
 explore: xss_test_8 {}
 
 explore: xss_test_9 {}
+
+week_start_day: saturday
