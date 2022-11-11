@@ -27,7 +27,9 @@ view: orders {
       quarter,
       year
     ]
+    convert_tz: no
     sql: ${TABLE}.created_at ;;
+    # sql: to_timestamp_ntz(${TABLE}.created_at) ;;
   }
 
   # Here's what a typical dimension looks like in LookML.
