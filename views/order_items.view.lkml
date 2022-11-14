@@ -56,6 +56,17 @@ view: order_items {
     sql: ${TABLE}.returned_at ;;
   }
 
+  dimension: date_formatted {
+    sql: ${returned_date} ;;
+    html:{{ rendered_value | date: "%b %d, %Y" }};;
+  }
+
+  dimension: month_returned {
+    # type: date_month
+    sql: ${returned_month} ;;
+    html:  {{ rendered_value | date: "%B, %Y" }};;
+  }
+
   dimension: sale_price {
     type: number
     sql: ${TABLE}.sale_price ;;
