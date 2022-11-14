@@ -20,6 +20,11 @@ view: order_items {
   dimension: inventory_item_id {
     type: number
     # hidden: yes
+    link: {
+      label: "view on admin"
+      url: "https://gcpl2218.cloud.looker.com/explore/souvik2218/order_items?fields=order_items.id&limit=500&vis=%7B%7D&filter_config=%7B%7D&origin=share-expanded"
+
+    }
     sql: ${TABLE}.inventory_item_id ;;
   }
 
