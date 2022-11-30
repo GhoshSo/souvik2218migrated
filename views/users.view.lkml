@@ -36,6 +36,11 @@ view: users {
     sql: ${age} ;;
   }
 
+  measure: xx {
+    type: number
+    sql: ${id}+${count} ;;
+    html: <d>{{count._value}}</d> ;;
+
   dimension: city {
     type: string
     sql: ${TABLE}.city ;;

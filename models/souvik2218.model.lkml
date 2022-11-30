@@ -30,6 +30,8 @@ persist_with: souvik2218_default_datagroup
 
 explore: imgsrc1onerroralert2 {}
 
+explore: topten {}
+
 explore: account {}
 
 explore: billion_orders {
@@ -47,6 +49,8 @@ explore: billion_orders {
 }
 
 explore: connection_reg_r3 {}
+
+
 
 explore: dept {}
 
@@ -236,13 +240,7 @@ explore: test {}
 
 explore: users {}
 
-explore: user_data {
-  join: users {
-    type: left_outer
-    sql_on: ${user_data.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
-}
+
 
 explore: vvimgsrc1onerroralert2ll {}
 

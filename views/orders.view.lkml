@@ -59,7 +59,16 @@ view: orders {
 
   dimension: status {
     type: string
-    sql: ${TABLE}.status ;;
+    sql: ${TABLE}.status;;
+  }
+
+  dimension: status_ysno {
+    type: string
+    sql:
+        CASE
+      WHEN ${status} = 'complete' THEN "yes"
+    ELSE "no"
+    END ;;
   }
 
   dimension: user_id {
