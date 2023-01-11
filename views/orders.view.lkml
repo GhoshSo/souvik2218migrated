@@ -68,6 +68,11 @@ view: orders {
     sql: ${TABLE}.user_id ;;
   }
 
+  dimension: created_at_date {
+    type: string
+    sql: ${users.created_at_date} ;;
+  }
+
   measure: count {
     type: count
     drill_fields: [detail*]

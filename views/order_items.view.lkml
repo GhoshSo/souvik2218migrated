@@ -1,5 +1,47 @@
 # The name of this view in Looker is "Order Items"
 view: order_items {
+
+  measure: total_sale_price {
+    type: sum
+    sql: ${sale_price} ;;
+  }
+
+  measure: average_sale_price {
+    type: average
+    sql: ${sale_price} ;;
+  }
+
+  measure: max_sale_price {
+    type: max
+    sql: ${sale_price} ;;
+  }
+
+
+
+
+  parameter: sale_price_metric_picker {
+    description: "Use with the Sale Price Metric measure"
+    type: unquoted
+    allowed_value: {
+      label: "Total Sale Price"
+      value: "total_sale_price"
+    }
+    allowed_value: {
+      label: "Average Sale Price"
+      value: "average_sale_price"
+    }
+  }
+
+  measure: dynamic_measure {
+    type: number
+    sql:
+    {% if sale_price_metric_picker._parameter_value == 'total_sale_price' %}
+    ${total_sale_price}
+    {% else %}
+    ${average_sale_price}
+    {% endif %}
+    ;;
+  }
   # The sql_table_name parameter indicates the underlying database table
   # to be used for all fields in this view.
   sql_table_name: demo_db.order_items ;;
@@ -49,15 +91,15 @@ view: order_items {
 
   dimension_group: returned {
     type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
+    # timeframes: [
+    #   raw,
+    #   time,
+    #   date,
+    #   week,
+    #   month,
+    #   quarter,
+    #   year
+    # ]
     sql: ${TABLE}.returned_at ;;
   }
 
@@ -81,15 +123,6 @@ view: order_items {
   # measures for this dimension, but you can also add measures of many different aggregates.
   # Click on the type parameter to see all the options in the Quick Help panel on the right.
 
-  measure: total_sale_price {
-    type: sum
-    sql: ${sale_price} ;;
-  }
-
-  measure: average_sale_price {
-    type: average
-    sql: ${sale_price} ;;
-  }
 
   measure: count {
     type: count

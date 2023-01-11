@@ -36,6 +36,11 @@ view: users {
     sql: ${age} ;;
   }
 
+  measure: total_avreage_age{
+    type: number
+    sql: ${average_age}+${total_age} ;;
+  }
+
   dimension: city {
     type: string
     sql: ${TABLE}.city ;;
@@ -67,6 +72,11 @@ view: users {
   dimension: email {
     type: string
     sql: ${TABLE}.email ;;
+  }
+
+  dimension: created_at_date {
+    type: string
+    sql: ${created_date} ;;
   }
 
   dimension: first_name {
