@@ -23,7 +23,7 @@ view: person {
   }
 
   dimension: city {
-    type: string
+    type: yesno
     sql: ${TABLE}.city ;;
   }
 

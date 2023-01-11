@@ -36,10 +36,17 @@ view: users {
     sql: ${age} ;;
   }
 
+<<<<<<< HEAD
   measure: total_avreage_age{
     type: number
     sql: ${average_age}+${total_age} ;;
   }
+=======
+  measure: xx {
+    type: number
+    sql: ${id}+${count} ;;
+    html: <d>{{count._value}}</d> ;;
+>>>>>>> branch 'master' of git@github.com:GhoshSo/souvik2218migrated.git
 
   dimension: city {
     type: string

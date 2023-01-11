@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Souvik2218
 =======
 <h1><span style="color:#2d7eea">README - Your LookML Project</span></h1>
@@ -53,3 +54,6 @@ To learn more about LookML and how to develop visit:
 - [Looker Help Center](https://help.looker.com)
 - [Looker University](https://training.looker.com/)
 >>>>>>> branch 'master' of git@github.com:GhoshSo/Souvik2218.git
+=======
+# souvik2218migrated
+>>>>>>> branch 'main' of git@github.com:GhoshSo/souvik2218migrated.git
