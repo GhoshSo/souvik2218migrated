@@ -3,7 +3,7 @@ connection: "thelook"
 
 # include all the views
 include: "/views/**/*.view"
-include: "/Souvik_Dashboard_Issue.dashboard.lookml"
+# include: "/Souvik_Dashboard_Issue.dashboard.lookml"
 
 # Datagroups define a caching policy for an Explore. To learn more,
 # use the Quick Help panel on the right to see documentation.
@@ -133,20 +133,7 @@ explore: orders {
 }
 
 # Place in `souvik2218` model
-explore: +order_items {
-  aggregate_table: rollup__returned_month_name {
-    query: {
-      dimensions: [returned_month_name]
-      measures: [average_sale_price, dynamic_measure, total_sale_price]
-      filters: [order_items.sale_price_metric_picker: "total^_sale^_price"]
-      timezone: "America/Los_Angeles"
-    }
 
-    materialization: {
-      datagroup_trigger: souvik2218_default_datagroup
-    }
-  }
-}
 
 
 explore: order_items {

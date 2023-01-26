@@ -23,6 +23,20 @@ view: orders {
     type: date_time
   }
 
+  parameter: data_end_year {
+    type: number
+    hidden: yes
+    label: "Price Effective End Year"
+  }
+
+  dimension: date_dim_year_filter {
+    type: number
+    hidden: yes
+    label: "Date Dim Year Filter Condition"
+    sql: CASE WHEN
+      {% parameter data_end_year %} IS NULL THEN 1 ELSE 0 END;;
+  }
+
   # dimension_group: created_on_hour_utc{}
 
   dimension_group: in_period {
@@ -78,14 +92,19 @@ view: orders {
   }
 
   dimension: created_at_date {
-    type: string
-    sql: ${users.created_at_date} ;;
+    type: number
+    hidden: yes
+    label: "Date Dim Year Filter Condition"
+    sql: CASE WHEN
+      {% parameter data_end_year %} IS NULL THEN 1 ELSE 0 END;;
   }
 
   measure: count {
     type: count
     drill_fields: [detail*]
   }
+
+
 
   # ----- Sets of fields for drilling ------
   set: detail {

@@ -11,13 +11,6 @@ view: order_items {
     sql: ${sale_price} ;;
   }
 
-  measure: max_sale_price {
-    type: max
-    sql: ${sale_price} ;;
-  }
-
-
-
 
   parameter: sale_price_metric_picker {
     description: "Use with the Sale Price Metric measure"
@@ -30,6 +23,20 @@ view: order_items {
       label: "Average Sale Price"
       value: "average_sale_price"
     }
+  }
+
+  parameter: data_end_year {
+    type: number
+    hidden: yes
+    label: "Price Effective End Year"
+  }
+
+  dimension: date_dim_year_filter {
+    type: number
+    hidden: yes
+    label: "Date Dim Year Filter Condition"
+    sql: CASE WHEN
+      {% parameter data_end_year %} IS NULL THEN 1 ELSE 0 END;;
   }
 
   measure: dynamic_measure {
@@ -117,7 +124,47 @@ view: order_items {
   dimension: sale_price {
     type: number
     sql: ${TABLE}.sale_price ;;
+    value_format_name: usd
   }
+
+  measure: min_sale_price {
+    type: min
+    sql: ${sale_price} ;;
+    group_label: "Box Plot of Sale Price"
+    value_format_name: usd
+  }
+
+  measure: max_sale_price {
+    type: max
+    sql: ${sale_price} ;;
+    group_label: "Box Plot of Sale Price"
+    value_format_name: usd
+  }
+
+  measure: first_quartile_sale_price {
+    type: percentile
+    percentile: 25
+    sql: ${sale_price} ;;
+    group_label: "Box Plot of Sale Price"
+    value_format_name: usd
+  }
+
+  measure: median_sale_price {
+    type: median
+    sql: ${sale_price} ;;
+    group_label: "Box Plot of Sale Price"
+    value_format_name: usd
+  }
+
+  measure: third_quartile_sale_price {
+    type: percentile
+    percentile: 75
+    sql: ${sale_price} ;;
+    group_label: "Box Plot of Sale Price"
+    value_format_name: usd
+  }
+
+
 
   # A measure is a field that uses a SQL aggregate function. Here are defined sum and average
   # measures for this dimension, but you can also add measures of many different aggregates.
