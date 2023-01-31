@@ -2,12 +2,12 @@
 view: order_items {
 
   measure: total_sale_price {
-    type: sum
+    type:  number
     sql: ${sale_price} ;;
   }
 
   measure: average_sale_price {
-    type: average
+    type: number
     sql: ${sale_price} ;;
   }
 
@@ -16,27 +16,30 @@ view: order_items {
     description: "Use with the Sale Price Metric measure"
     type: unquoted
     allowed_value: {
-      label: "Total Sale Price"
-      value: "total_sale_price"
-    }
-    allowed_value: {
       label: "Average Sale Price"
       value: "average_sale_price"
+    }
+    allowed_value: {
+      label: "Total Sale Price"
+      value: "total_sale_price"
     }
   }
 
   parameter: data_end_year {
     type: number
-    hidden: yes
     label: "Price Effective End Year"
   }
 
   dimension: date_dim_year_filter {
     type: number
-    hidden: yes
     label: "Date Dim Year Filter Condition"
     sql: CASE WHEN
       {% parameter data_end_year %} IS NULL THEN 1 ELSE 0 END;;
+    # sql: {% parameter data_end_year %} IS NULL ;;
+    # sql:
+    # {% if data_end_year._parameter_value = NULL %} 1
+    # {% else %} 0
+    # {% endif %};;
   }
 
   measure: dynamic_measure {
