@@ -70,10 +70,7 @@ view: order_items {
     sql: ${id}+2 ;;
   }
 
-  dimension: id_new2 {
-    type: number
-    sql: ${id}+3 ;;
-  }
+
 
   # Here's what a typical dimension looks like in LookML.
   # A dimension is a groupable field that can be used to filter query results.

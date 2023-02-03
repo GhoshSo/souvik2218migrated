@@ -109,11 +109,18 @@ view: users {
   dimension: state {
     type: string
     sql: ${TABLE}.state ;;
+    html: "<a title={{users.state._rendered_value}}> {{ rendered_value | value | strip_html }} </a>";;
   }
 
   dimension: zip {
     type: zipcode
     sql: ${TABLE}.zip ;;
+  }
+
+  dimension: all_concat {
+    type: string
+    sql: concat(${email}, " ",${zip}," ",${state}, " ",${last_name}, " ",${first_name}, " ",${mkc}, " ",${city}, " ",${age}) ;;
+    html: "<a title={{users.all_concat._rendered_value}}> {{ rendered_value | value | strip_html }} </a>";;
   }
 
   measure: count {
