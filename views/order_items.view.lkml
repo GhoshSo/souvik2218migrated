@@ -68,8 +68,7 @@ view: order_items {
   dimension: id_new {
     type: number
     sql: ${id}+2 ;;
-  }
-
+ }
 
 
   # Here's what a typical dimension looks like in LookML.
