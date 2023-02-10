@@ -107,15 +107,16 @@ view: order_items {
 
   dimension_group: returned {
     type: time
-    # timeframes: [
-    #   raw,
-    #   time,
-    #   date,
-    #   week,
-    #   month,
-    #   quarter,
-    #   year
-    # ]
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      week_of_year,
+      month,
+      quarter,
+      year
+    ]
     sql: ${TABLE}.returned_at ;;
   }
 

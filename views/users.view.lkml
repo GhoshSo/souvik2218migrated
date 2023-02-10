@@ -101,6 +101,14 @@ view: users {
     sql: ${TABLE}.gender ;;
   }
 
+  dimension: is_null_test {
+    type: string
+    sql: CASE
+      WHEN ${gender} IS NOT NULL THEN " "
+      ELSE ${gender}
+      END ;;
+  }
+
   dimension: last_name {
     type: string
     sql: ${TABLE}.last_name ;;
