@@ -1,6 +1,7 @@
 # The name of this view in Looker is "Order Items"
 view: order_items {
-#### Just Checking on PULL REQUEST..!
+
+## What is this behavior???????????????
 
   measure: total_sale_price {
     type:  number
