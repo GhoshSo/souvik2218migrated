@@ -23,6 +23,28 @@ view: orders {
     type: date_time
   }
 
+  dimension_group: created {
+    type: time
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      month,
+      quarter,
+      year
+    ]
+    sql: ${TABLE}.created_at ;;
+  }
+
+  dimension: created_sample {
+    type: date
+    datatype: date
+    convert_tz: no
+    sql: ${TABLE}.created_at ;;
+    html: {{rendered_value | date: "%m/%d/%Y"}} ;;
+  }
+
   # dimension_group: created_on_hour_utc{}
 
   dimension_group: in_period {
@@ -36,22 +58,22 @@ view: orders {
     convert_tz: no
   }
 
-  dimension_group: created {
-    type: time
-    # timeframes: [
-    #   raw,
-    #   time,
-    #   date,
-    #   week,
-    #   month,
-    #   quarter,
-    #   year
-    # ]
-    convert_tz: no
-    sql: ${TABLE}.created_at ;;
-    #sql: to_timestamp_ntz(${TABLE}.created_at) ;;
+  # dimension_group: created {
+  #   type: time
+  #   # timeframes: [
+  #   #   raw,
+  #   #   time,
+  #   #   date,
+  #   #   week,
+  #   #   month,
+  #   #   quarter,
+  #   #   year
+  #   # ]
+  #   convert_tz: no
+  #   sql: ${TABLE}.created_at ;;
+  #   #sql: to_timestamp_ntz(${TABLE}.created_at) ;;
 
-  }
+  # }
 
   # Here's what a typical dimension looks like in LookML.
   # A dimension is a groupable field that can be used to filter query results.
