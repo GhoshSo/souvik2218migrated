@@ -27,6 +27,7 @@ view: order_items {
 
   parameter: data_end_year {
     type: number
+    default_value: "NULL"
     label: "Price Effective End Year"
   }
 
@@ -64,6 +65,14 @@ view: order_items {
     type: number
     sql: ${TABLE}.id ;;
   }
+
+  dimension: id2 {
+    #primary_key: yes
+    type: number
+    sql: ${id}*2;;
+  }
+
+  ##New ID is missing
 
   # Here's what a typical dimension looks like in LookML.
   # A dimension is a groupable field that can be used to filter query results.
