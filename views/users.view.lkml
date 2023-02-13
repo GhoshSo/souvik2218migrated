@@ -29,6 +29,7 @@ view: users {
   measure: total_age {
     type: sum
     sql: ${age} ;;
+    value_format: "[>=1000]0.000,\" K\";0.##"
   }
 
   measure: average_age {
@@ -53,6 +54,11 @@ view: users {
     sql: ${TABLE}.city ;;
   }
 
+  dimension: city_sub {
+    type: string
+    sql: CASE WHEN SUBSTRING(${city},1,1) = "S" then SUBSTRING(${city},1,1) ELSE ${city} END ;;
+  }
+
   dimension: country {
     type: string
     map_layer_name: countries
@@ -74,6 +80,11 @@ view: users {
       year
     ]
     sql: ${TABLE}.created_at ;;
+  }
+
+  dimension: created_monthA {
+    type: date_day_of_month
+    sql: ${created_month} ;;
   }
 
   dimension: email {
