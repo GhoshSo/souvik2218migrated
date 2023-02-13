@@ -66,13 +66,11 @@ view: order_items {
     sql: ${TABLE}.id ;;
   }
 
-  dimension: id2 {
-    #primary_key: yes
+  dimension: id_new {
     type: number
-    sql: ${id}*2;;
-  }
+    sql: ${id}+2 ;;
+ }
 
-  ##New ID is missing
 
   # Here's what a typical dimension looks like in LookML.
   # A dimension is a groupable field that can be used to filter query results.
@@ -110,15 +108,16 @@ view: order_items {
 
   dimension_group: returned {
     type: time
-    # timeframes: [
-    #   raw,
-    #   time,
-    #   date,
-    #   week,
-    #   month,
-    #   quarter,
-    #   year
-    # ]
+    timeframes: [
+      raw,
+      time,
+      date,
+      week,
+      week_of_year,
+      month,
+      quarter,
+      year
+    ]
     sql: ${TABLE}.returned_at ;;
   }
 

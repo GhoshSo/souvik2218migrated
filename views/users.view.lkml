@@ -101,6 +101,14 @@ view: users {
     sql: ${TABLE}.gender ;;
   }
 
+  dimension: is_null_test {
+    type: string
+    sql: CASE
+      WHEN ${gender} IS NOT NULL THEN " "
+      ELSE ${gender}
+      END ;;
+  }
+
   dimension: last_name {
     type: string
     sql: ${TABLE}.last_name ;;
@@ -109,11 +117,18 @@ view: users {
   dimension: state {
     type: string
     sql: ${TABLE}.state ;;
+    html: "<a title={{users.state._rendered_value}}> {{ rendered_value | value | strip_html }} </a>";;
   }
 
   dimension: zip {
     type: zipcode
     sql: ${TABLE}.zip ;;
+  }
+
+  dimension: all_concat {
+    type: string
+    sql: concat(${email}, " ",${zip}," ",${state}, " ",${last_name}, " ",${first_name}, " ",${mkc}, " ",${city}, " ",${age}) ;;
+    html: "<a title={{users.all_concat._rendered_value}}> {{ rendered_value | value | strip_html }} </a>";;
   }
 
   measure: count {
