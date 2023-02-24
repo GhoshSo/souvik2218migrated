@@ -1,6 +1,6 @@
 # Define the database connection to be used for this model.
 connection: "thelook"
-
+#include
 # include all the views
 include: "/views/**/*.view"
 # include: "/Souvik_Dashboard_Issue.dashboard.lookml"

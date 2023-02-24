@@ -1,6 +1,8 @@
 # The name of this view in Looker is "Order Items"
 view: order_items {
 
+## What is this behavior???????????????
+
   measure: total_sale_price {
     type:  number
     sql: ${sale_price} ;;
@@ -70,6 +72,8 @@ view: order_items {
     type: number
     sql: ${id}+2 ;;
  }
+
+## THis is a new line
 
 
   # Here's what a typical dimension looks like in LookML.
