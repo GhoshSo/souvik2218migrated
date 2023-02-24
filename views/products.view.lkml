@@ -59,6 +59,7 @@ view: products {
   measure: average_retail_price {
     type: average
     sql: ${retail_price} ;;
+    html: <p style="color: red; background-color:white">{{ rendered_value }}</p>;;
   }
 
   dimension: sku {

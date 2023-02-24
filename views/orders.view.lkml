@@ -11,6 +11,7 @@ view: orders {
     primary_key: yes
     type: number
     sql: ${TABLE}.id ;;
+    html: <background-color:white>;;
   }
 
   # Dates and timestamps can be represented in Looker using a dimension group of type: time.

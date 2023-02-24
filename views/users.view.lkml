@@ -12,7 +12,13 @@ view: users {
     type: number
     sql: ${TABLE}.id ;;
   }
-
+  dimension: datetest {
+    type: date
+   sql: DATETIME_DIFF(
+IF(EXTRACT(YEAR FROM DATE(1,1,1) = 1), DATETIME(1, 1, 1, 1, 1, 1), DATETIME(1, 1, 1, 1, 1, 1)),
+DATETIME(1, 1, 1, 1, 1, 1),
+HOUR);;
+  }
   # Here's what a typical dimension looks like in LookML.
   # A dimension is a groupable field that can be used to filter query results.
   # This dimension will be called "Age" in Explore.
@@ -39,7 +45,7 @@ view: users {
   measure: xx {
     type: number
     sql: ${id}+${count} ;;
-    html: <d>{{count._value}}</d> ;;
+    html: <d>{{count._value}}</d> ;;}
 
   dimension: city {
     type: string

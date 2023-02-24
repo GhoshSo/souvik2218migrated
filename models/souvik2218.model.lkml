@@ -41,11 +41,7 @@ explore: billion_orders {
     relationship: many_to_one
   }
 
-  join: users {
-    type: left_outer
-    sql_on: ${orders.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
+
 }
 
 explore: connection_reg_r3 {}
@@ -57,11 +53,8 @@ explore: dept {}
 explore: employees {}
 
 explore: events {
-  join: users {
-    type: left_outer
-    sql_on: ${events.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
+  hidden: yes
+
 }
 
 explore: fakeorders {
@@ -71,11 +64,7 @@ explore: fakeorders {
     relationship: many_to_one
   }
 
-  join: users {
-    type: left_outer
-    sql_on: ${orders.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
+
 }
 
 explore: fatal_error_user_derived_base {}
@@ -91,11 +80,7 @@ explore: hundred_million_orders {
     relationship: many_to_one
   }
 
-  join: users {
-    type: left_outer
-    sql_on: ${orders.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
+
 }
 
 explore: hundred_million_orders_wide {
@@ -105,11 +90,7 @@ explore: hundred_million_orders_wide {
     relationship: many_to_one
   }
 
-  join: users {
-    type: left_outer
-    sql_on: ${orders.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
+
 }
 
 explore: incremental_pdts_test {}
@@ -125,14 +106,11 @@ explore: inventory_items {
 }
 
 explore: orders {
-  join: users {
-    type: left_outer
-    sql_on: ${orders.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
+
 }
 
 explore: order_items {
+  #hidden: yes
   join: orders {
     type: left_outer
     sql_on: ${order_items.order_id} = ${orders.id} ;;
@@ -145,11 +123,7 @@ explore: order_items {
     relationship: many_to_one
   }
 
-  join: users {
-    type: left_outer
-    sql_on: ${orders.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
+
 
   join: products {
     type: left_outer
@@ -171,11 +145,7 @@ explore: order_items_vijaya {
     relationship: many_to_one
   }
 
-  join: users {
-    type: left_outer
-    sql_on: ${orders.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
+
 
   join: products {
     type: left_outer
@@ -205,21 +175,13 @@ explore: salary {
 }
 
 explore: saralooker {
-  join: users {
-    type: left_outer
-    sql_on: ${saralooker.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
+
 }
 
 explore: schema_migrations {}
 
 explore: sindhu {
-  join: users {
-    type: left_outer
-    sql_on: ${sindhu.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
+
 }
 
 explore: ten_million_orders {
@@ -229,16 +191,12 @@ explore: ten_million_orders {
     relationship: many_to_one
   }
 
-  join: users {
-    type: left_outer
-    sql_on: ${orders.user_id} = ${users.id} ;;
-    relationship: many_to_one
-  }
+
 }
 
 explore: test {}
 
-explore: users {}
+
 
 
 
