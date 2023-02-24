@@ -29,6 +29,7 @@ view: order_items {
 
   parameter: data_end_year {
     type: number
+    default_value: "NULL"
     label: "Price Effective End Year"
   }
 
