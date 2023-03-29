@@ -138,6 +138,29 @@ explore: orders {
 
 # Place in `souvik2218` model
 
+# Place in `thelook` model
+explore: +order_items {
+  aggregate_table: rollup__inventory_items_cost__products_brand__products_item_name__returned_date__users_city__users_gender__users_state {
+    query: {
+      dimensions: [
+        inventory_items.cost,
+        products.brand,
+        products.item_name,
+        returned_date,
+        users.city,
+        users.gender,
+        users.state
+      ]
+      measures: [count, products.count, users.count]
+      filters: [users.state: "-Arizona,-Arkansas,-Alabama,-Florida"]
+      timezone: "America/Los_Angeles"
+    }
+
+    materialization: {
+      datagroup_trigger: souvik2218_default_datagroup
+    }
+  }
+}
 
 
 explore: order_items {
