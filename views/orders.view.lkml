@@ -49,7 +49,7 @@ view: orders {
     # hidden:  yes
     convert_tz: no
   }
-
+##
   dimension_group: created {
     type: time
     # timeframes: [
@@ -64,7 +64,7 @@ view: orders {
     convert_tz: no
     sql: ${TABLE}.created_at ;;
     #sql: to_timestamp_ntz(${TABLE}.created_at) ;;
-
+#####
   }
 
   # Here's what a typical dimension looks like in LookML.
@@ -104,7 +104,13 @@ view: orders {
     drill_fields: [detail*]
   }
 
-
+  dimension: convert_tz_test {
+    type: string
+    suggest_persist_for: "0 seconds"
+    sql:  CASE WHEN ${id}>100 THEN CONCAT(CONVERT_TZ(${created_raw},'UTC','{{ _query._query_timezone }}'), " ",${id})
+             ELSE " "
+        END;;
+  }
 
   # ----- Sets of fields for drilling ------
   set: detail {
