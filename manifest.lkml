@@ -9,3 +9,6 @@ new_lookml_runtime: no
 # local_dependency: {
 #   project: "name_of_other_project"
 # }
+local_dependency: {
+  project: "spandana_234"
+}

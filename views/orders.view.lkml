@@ -76,15 +76,6 @@ view: orders {
     sql: ${TABLE}.status;;
   }
 
-  dimension: status_ysno {
-    type: string
-    sql:
-        CASE
-      WHEN ${status} = 'complete' THEN "yes"
-    ELSE "no"
-    END ;;
-  }
-
   dimension: user_id {
     type: number
     # hidden: yes
@@ -112,7 +103,59 @@ view: orders {
         END;;
   }
 
-  # ----- Sets of fields for drilling ------
+  parameter:color_yesterdays_figures {
+    type: string
+    allowed_value: {
+      label: "Yes"
+      value: "yes"
+    }
+    allowed_value: {
+      label: "No"
+      value: "no"
+    }
+    default_value: "yes"
+  }
+
+  dimension: status_yesno_Parameter_and_Status {
+    type: string
+    sql:
+        CASE
+           WHEN ${status} = 'complete' THEN "yes"
+           ELSE "no"
+        END ;;
+    html: {% if status._value == "pending" and  color_yesterdays_figures._parameter_value == "yes" %}
+               <p style='color: black; background-color: #c8e6c8;'>{{rendered_value}}</p>
+          {% else %} <font color="darkred">{{ rendered_value }}</font>
+          {% endif %};;
+  }
+
+  dimension: status_yesno_Only_Status {
+    type: string
+    sql:
+        CASE
+           WHEN ${status} = 'complete' THEN "yes"
+           ELSE "no"
+        END ;;
+    html: {% if status._value == "pending" %}
+               <p style='color: black; background-color: #c8e6c8;'>{{rendered_value}}</p>
+          {% else %} <font color="darkred">{{ rendered_value }}</font>
+          {% endif %};;
+  }
+
+  dimension: status_yesno_Only_Parameter {
+    type: string
+    sql:
+        CASE
+           WHEN ${status} = 'complete' THEN "yes"
+           ELSE "no"
+        END ;;
+    html: {% if color_yesterdays_figures._parameter_value == "yes" %}
+               <p style='color: black; background-color: #c8e6c8;'>{{rendered_value}}</p>
+          {% else %} <font color="darkred">{{ rendered_value }}</font>
+          {% endif %};;
+  }
+
+
   set: detail {
     fields: [
       id,

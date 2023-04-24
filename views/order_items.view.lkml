@@ -9,9 +9,10 @@ view: order_items {
   }
 
   measure: average_sale_price {
-    type: number
+    type: average
     sql: ${sale_price} ;;
   }
+
 
 ###___SHASHIKANT____###
 
