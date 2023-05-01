@@ -9,10 +9,12 @@ view: order_items {
   }
 
   measure: average_sale_price {
-    type: number
+    type: average
     sql: ${sale_price} ;;
   }
 
+
+###___SHASHIKANT____###
 
   parameter: sale_price_metric_picker {
     description: "Use with the Sale Price Metric measure"
@@ -29,6 +31,7 @@ view: order_items {
 
   parameter: data_end_year {
     type: number
+    default_value: "NULL"
     label: "Price Effective End Year"
   }
 

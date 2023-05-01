@@ -142,6 +142,13 @@ view: users {
     html: "<a title={{users.all_concat._rendered_value}}> {{ rendered_value | value | strip_html }} </a>";;
   }
 
+  measure: state_count {
+    type: count
+    sql: ${state} ;;
+  }
+
+
+
   measure: count {
     type: count
     drill_fields: [detail*]

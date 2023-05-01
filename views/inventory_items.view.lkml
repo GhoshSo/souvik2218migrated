@@ -22,6 +22,11 @@ view: inventory_items {
     sql: ${TABLE}.cost ;;
   }
 
+  dimension: date_diff {
+    type: number
+    sql: sql: DATEDIFF(${created_year}, ${sold_year}) ;;
+  }
+
   # A measure is a field that uses a SQL aggregate function. Here are defined sum and average
   # measures for this dimension, but you can also add measures of many different aggregates.
   # Click on the type parameter to see all the options in the Quick Help panel on the right.
@@ -41,36 +46,29 @@ view: inventory_items {
 
   dimension_group: created {
     type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
+    timeframes: [raw, time, date, week, month, quarter, year]
     sql: ${TABLE}.created_at ;;
   }
+
+  dimension_group: sold {
+    type: time
+    timeframes: [raw, time, date, week, month, quarter, year]
+    sql: ${TABLE}.sold_at ;;
+  }
+
+  dimension_group: created_sold {
+    type:  duration
+
+    sql_start: ${created_date} ;;
+    sql_end: ${sold_date} ;;
+  }
+
+
 
   dimension: product_id {
     type: number
     # hidden: yes
     sql: ${TABLE}.product_id ;;
-  }
-
-  dimension_group: sold {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.sold_at ;;
   }
 
   measure: count {

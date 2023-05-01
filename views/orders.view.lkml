@@ -49,7 +49,7 @@ view: orders {
     # hidden:  yes
     convert_tz: no
   }
-
+##
   dimension_group: created {
     type: time
     # timeframes: [
@@ -64,7 +64,7 @@ view: orders {
     convert_tz: no
     sql: ${TABLE}.created_at ;;
     #sql: to_timestamp_ntz(${TABLE}.created_at) ;;
-
+#####
   }
 
   # Here's what a typical dimension looks like in LookML.
@@ -74,15 +74,6 @@ view: orders {
   dimension: status {
     type: string
     sql: ${TABLE}.status;;
-  }
-
-  dimension: status_ysno {
-    type: string
-    sql:
-        CASE
-      WHEN ${status} = 'complete' THEN "yes"
-    ELSE "no"
-    END ;;
   }
 
   dimension: user_id {
@@ -104,9 +95,67 @@ view: orders {
     drill_fields: [detail*]
   }
 
+  dimension: convert_tz_test {
+    type: string
+    suggest_persist_for: "0 seconds"
+    sql:  CASE WHEN ${id}>100 THEN CONCAT(CONVERT_TZ(${created_raw},'UTC','{{ _query._query_timezone }}'), " ",${id})
+             ELSE " "
+        END;;
+  }
+
+  parameter:color_yesterdays_figures {
+    type: string
+    allowed_value: {
+      label: "Yes"
+      value: "yes"
+    }
+    allowed_value: {
+      label: "No"
+      value: "no"
+    }
+    default_value: "yes"
+  }
+
+  dimension: status_yesno_Parameter_and_Status {
+    type: string
+    sql:
+        CASE
+           WHEN ${status} = 'complete' THEN "yes"
+           ELSE "no"
+        END ;;
+    html: {% if status._value == "pending" and  color_yesterdays_figures._parameter_value == "yes" %}
+               <p style='color: black; background-color: #c8e6c8;'>{{rendered_value}}</p>
+          {% else %} <font color="darkred">{{ rendered_value }}</font>
+          {% endif %};;
+  }
+
+  dimension: status_yesno_Only_Status {
+    type: string
+    sql:
+        CASE
+           WHEN ${status} = 'complete' THEN "yes"
+           ELSE "no"
+        END ;;
+    html: {% if status._value == "pending" %}
+               <p style='color: black; background-color: #c8e6c8;'>{{rendered_value}}</p>
+          {% else %} <font color="darkred">{{ rendered_value }}</font>
+          {% endif %};;
+  }
+
+  dimension: status_yesno_Only_Parameter {
+    type: string
+    sql:
+        CASE
+           WHEN ${status} = 'complete' THEN "yes"
+           ELSE "no"
+        END ;;
+    html: {% if color_yesterdays_figures._parameter_value == "yes" %}
+               <p style='color: black; background-color: #c8e6c8;'>{{rendered_value}}</p>
+          {% else %} <font color="darkred">{{ rendered_value }}</font>
+          {% endif %};;
+  }
 
 
-  # ----- Sets of fields for drilling ------
   set: detail {
     fields: [
       id,
