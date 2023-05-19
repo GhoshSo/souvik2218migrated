@@ -151,7 +151,7 @@ view: users {
 
   measure: count {
     type: count
-    drill_fields: [detail*]
+    #drill_fields: [detail*]
   }
 
   # ----- Sets of fields for drilling ------

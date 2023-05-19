@@ -5,12 +5,15 @@ view: order_items {
 
   measure: total_sale_price {
     type:  number
-    sql: ${sale_price} ;;
+    sql: ${sale_price}/100 ;;
+    value_format: "0.00%"
+
   }
 
   measure: average_sale_price {
     type: average
     sql: ${sale_price} ;;
+    #value_format: "0.00%"
   }
 
 
@@ -56,8 +59,13 @@ view: order_items {
     ${total_sale_price}
     {% else %}
     ${average_sale_price}
-    {% endif %}
-    ;;
+    {% endif %};;
+
+    html:  {% if sale_price_metric_picker._parameter_value == 'total_sale_price' %}
+    <p> {{total_sale_price._value}}&#37 </p>
+    {% else %}
+    <p> {{average_sale_price._value}} </p>
+    {% endif %};;
   }
   # The sql_table_name parameter indicates the underlying database table
   # to be used for all fields in this view.
